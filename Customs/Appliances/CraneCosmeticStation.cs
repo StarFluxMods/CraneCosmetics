@@ -23,8 +23,7 @@ namespace CraneCosmetics.Customs.Appliances
                 HideBin = true
             },
             new CTriggerPlayerSpecificUI(),
-            new CCraneEditor(),
-            new CNightTimeIndicator()
+            new CCraneEditor()
         };
 
         public override void OnRegister(Appliance gameDataObject)

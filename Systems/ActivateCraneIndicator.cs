@@ -1,5 +1,7 @@
 ﻿using CraneCosmetics.Components;
+using CraneCosmetics.Customs.Appliances;
 using Kitchen;
+using KitchenLib.Utils;
 using KitchenMods;
 
 namespace CraneCosmetics.Systems
@@ -21,7 +23,7 @@ namespace CraneCosmetics.Systems
 
         protected override bool IsPossible(ref InteractionData data)
         {
-            return Has<CNightTimeIndicator>(data.Target) && Require(data.Target, out Editor) && (!Require(data.Target, out OwnedByPlayer) || !(OwnedByPlayer.Player != data.Interactor));
+            return Require(data.Target, out CAppliance cAppliance) && cAppliance.ID == GDOUtils.GetCustomGameDataObject<CraneCosmeticStation>().ID && Require(data.Target, out Editor) && (!Require(data.Target, out OwnedByPlayer) || !(OwnedByPlayer.Player != data.Interactor));
         }
 
         protected override void Perform(ref InteractionData data)

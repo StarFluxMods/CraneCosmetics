@@ -27,6 +27,11 @@ namespace CraneCosmetics.Systems
                 return;
             }
 
+            if (Mod.Register != null)
+            {
+                return;
+            }
+
             if (GetNextAvailableCPosition(4, out Vector3 result, 10))
             {
                 Entity entity = EntityManager.CreateEntity(typeof(CCreateAppliance), typeof(CPosition), typeof(SCreateCraneCosmeticStation), typeof(CDoNotPersist));

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using CraneCosmetics.Customs.Types;
 using CraneCosmetics.Enums;
-using CraneCosmetics.Menus.Grids;
+using CraneCosmetics.Utility;
 using CraneCosmetics.Views;
 using HarmonyLib;
 using Kitchen;
-using Kitchen.Modules;
 using KitchenData;
 using KitchenLib.Utils;
 using UnityEngine;
@@ -67,29 +66,7 @@ namespace CraneCosmetics.Patches
                 CraneCosmeticIndicator upgradeIndicator = NewUIPrefab.AddComponent<CraneCosmeticIndicator>();
                 upgradeIndicator.Container = (Transform)_Container?.GetValue(costumeChangeIndicator);
 
-                GridMenuNavigationConfig rootMenu = ScriptableObject.CreateInstance<GridMenuNavigationConfig>();
-                CraneCosmeticGridConfig clawMenu = ScriptableObject.CreateInstance<CraneCosmeticGridConfig>();
-                CraneCosmeticGridConfig chainMenu = ScriptableObject.CreateInstance<CraneCosmeticGridConfig>();
-                CraneCosmeticGridConfig headMenu = ScriptableObject.CreateInstance<CraneCosmeticGridConfig>();
-
-                clawMenu.Cosmetics = Heads;
-                clawMenu.Icon = Mod.Bundle.LoadAsset<Texture2D>("Head");
-                    
-                chainMenu.Cosmetics = Chains;
-                chainMenu.Icon = Mod.Bundle.LoadAsset<Texture2D>("Chains");
-                
-                headMenu.Cosmetics = Claws;
-                headMenu.Icon = Mod.Bundle.LoadAsset<Texture2D>("Claw");
-                
-
-                rootMenu.Links = new List<GridMenuConfig>
-                {
-                    headMenu,
-                    chainMenu,
-                    clawMenu,
-                };
-
-                upgradeIndicator.RootMenuConfig = rootMenu;
+                upgradeIndicator.RootMenuConfig = MenuBuilder.BuildMenu();
                 Component.DestroyImmediate(costumeChangeIndicator);
             }
 
